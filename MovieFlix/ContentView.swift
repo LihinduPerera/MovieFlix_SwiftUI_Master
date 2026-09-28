@@ -10,21 +10,21 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            Text("Home")
+            Text(Constants.homeString)
                 .tabItem {
-                    Label("Home", systemImage: "house")
+                    Label(Constants.homeString, systemImage: Constants.homeIconString)
                 }
-            Text("Upcomming")
+            Text(Constants.upcommingString)
                 .tabItem {
-                    Label("Upcomming", systemImage: "play.circle")
+                    Label(Constants.upcommingString, systemImage: Constants.upcommingIconString)
                 }
-            Text("Search")
+            Text(Constants.searchingString)
                 .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
+                    Label(Constants.searchingString, systemImage: Constants.searchingIconString)
                 }
-            Text("Download")
+            Text(Constants.downloadString)
                 .tabItem {
-                    Label("Download", systemImage: "arrow.down.to.line")
+                    Label(Constants.downloadString, systemImage: Constants.downloadIconString)
                 }
         }
     }
