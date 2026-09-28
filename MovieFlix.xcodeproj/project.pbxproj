@@ -13,6 +13,7 @@
 		070D8713306A1B2B00C0AF9F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 070D8712306A1B2B00C0AF9F /* Preview Assets.xcassets */; };
 		070D871A306A393400C0AF9F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070D8719306A393400C0AF9F /* Constants.swift */; };
 		070D871C306A3BDD00C0AF9F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070D871B306A3BDD00C0AF9F /* HomeView.swift */; };
+		070D8720306AB98100C0AF9F /* HorizontalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070D871F306AB98100C0AF9F /* HorizontalListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		070D8712306A1B2B00C0AF9F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		070D8719306A393400C0AF9F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		070D871B306A3BDD00C0AF9F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		070D871F306AB98100C0AF9F /* HorizontalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				070D870D306A1B2800C0AF9F /* ContentView.swift */,
 				070D871B306A3BDD00C0AF9F /* HomeView.swift */,
 				070D8719306A393400C0AF9F /* Constants.swift */,
+				070D871F306AB98100C0AF9F /* HorizontalListView.swift */,
 				070D870F306A1B2B00C0AF9F /* Assets.xcassets */,
 				070D8711306A1B2B00C0AF9F /* Preview Content */,
 			);
@@ -147,6 +150,7 @@
 				070D871C306A3BDD00C0AF9F /* HomeView.swift in Sources */,
 				070D870C306A1B2800C0AF9F /* MovieFlixApp.swift in Sources */,
 				070D871A306A393400C0AF9F /* Constants.swift in Sources */,
+				070D8720306AB98100C0AF9F /* HorizontalListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
