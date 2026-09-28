@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Constants {
     static let homeString = "Home"
@@ -20,4 +21,17 @@ struct Constants {
     static let downloadIconString = "arrow.down.to.line"
 
     static let testTitleURL = "https://image.tmdb.org/t/p/w500/nnl6OWkyPpuMm595hmAxNW3rZFn.jpg"
+}
+
+extension Text {
+    func ghostButton() -> some View {
+        self
+            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 50)
+            .foregroundStyle(.buttonText)
+            .bold()
+            .background {
+                RoundedRectangle(cornerRadius: 20, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/)
+                    .stroke(.buttonBorder,lineWidth: 5)
+        }
+    }
 }

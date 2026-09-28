@@ -24,18 +24,13 @@ struct HomeView: View {
                     
                 } label: {
                     Text(Constants.playString)
-                        .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 50)
-                        .foregroundStyle(.buttonText)
-                        .bold()
-                        .background {
-                            RoundedRectangle(cornerRadius: 20, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/)
-                                .stroke(.buttonBorder,lineWidth: 5)
-                        }
+                        .ghostButton()
                 }
                 Button {
                     
                 } label: {
                     Text(Constants.downloadString)
+                        .ghostButton()
                 }
             }
         }
