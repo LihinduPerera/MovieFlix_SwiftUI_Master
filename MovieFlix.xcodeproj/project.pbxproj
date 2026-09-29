@@ -19,6 +19,7 @@
 		07245D9D306B562000C49889 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07245D9C306B562000C49889 /* APIConfig.swift */; };
 		07245D9F306B5B3000C49889 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07245D9E306B5B3000C49889 /* Errors.swift */; };
 		07245DA1306B680200C49889 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07245DA0306B680200C49889 /* DataFetcher.swift */; };
+		075F16FB306C14EB0090F4DD /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F16FA306C14EB0090F4DD /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		07245D9C306B562000C49889 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
 		07245D9E306B5B3000C49889 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		07245DA0306B680200C49889 /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
+		075F16FA306C14EB0090F4DD /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				070D870B306A1B2800C0AF9F /* MovieFlixApp.swift */,
 				070D870D306A1B2800C0AF9F /* ContentView.swift */,
 				07245D9E306B5B3000C49889 /* Errors.swift */,
+				075F16FA306C14EB0090F4DD /* ViewModel.swift */,
 				07245DA0306B680200C49889 /* DataFetcher.swift */,
 				070D871B306A3BDD00C0AF9F /* HomeView.swift */,
 				07245D98306B4E5100C49889 /* Title.swift */,
@@ -162,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				075F16FB306C14EB0090F4DD /* ViewModel.swift in Sources */,
 				070D870E306A1B2800C0AF9F /* ContentView.swift in Sources */,
 				070D871C306A3BDD00C0AF9F /* HomeView.swift in Sources */,
 				070D870C306A1B2800C0AF9F /* MovieFlixApp.swift in Sources */,
