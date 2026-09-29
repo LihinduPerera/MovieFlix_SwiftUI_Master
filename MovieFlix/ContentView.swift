@@ -27,6 +27,10 @@ struct ContentView: View {
                     Label(Constants.downloadString, systemImage: Constants.downloadIconString)
                 }
         }
+        .onAppear{
+            print(APIConfig.shared.tmdbBaseURL)
+            print(APIConfig.shared.tmdbAPIKey)
+        }
     }
 }
 

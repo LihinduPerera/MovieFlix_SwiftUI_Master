@@ -14,6 +14,9 @@
 		070D871A306A393400C0AF9F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070D8719306A393400C0AF9F /* Constants.swift */; };
 		070D871C306A3BDD00C0AF9F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070D871B306A3BDD00C0AF9F /* HomeView.swift */; };
 		070D8720306AB98100C0AF9F /* HorizontalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070D871F306AB98100C0AF9F /* HorizontalListView.swift */; };
+		07245D99306B4E5100C49889 /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07245D98306B4E5100C49889 /* Title.swift */; };
+		07245D9B306B550E00C49889 /* APIConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 07245D9A306B550E00C49889 /* APIConfig.json */; };
+		07245D9D306B562000C49889 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07245D9C306B562000C49889 /* APIConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +28,9 @@
 		070D8719306A393400C0AF9F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		070D871B306A3BDD00C0AF9F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		070D871F306AB98100C0AF9F /* HorizontalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalListView.swift; sourceTree = "<group>"; };
+		07245D98306B4E5100C49889 /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
+		07245D9A306B550E00C49889 /* APIConfig.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = APIConfig.json; sourceTree = "<group>"; };
+		07245D9C306B562000C49889 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,9 @@
 				070D870B306A1B2800C0AF9F /* MovieFlixApp.swift */,
 				070D870D306A1B2800C0AF9F /* ContentView.swift */,
 				070D871B306A3BDD00C0AF9F /* HomeView.swift */,
+				07245D98306B4E5100C49889 /* Title.swift */,
+				07245D9A306B550E00C49889 /* APIConfig.json */,
+				07245D9C306B562000C49889 /* APIConfig.swift */,
 				070D8719306A393400C0AF9F /* Constants.swift */,
 				070D871F306AB98100C0AF9F /* HorizontalListView.swift */,
 				070D870F306A1B2B00C0AF9F /* Assets.xcassets */,
@@ -136,6 +145,7 @@
 			files = (
 				070D8713306A1B2B00C0AF9F /* Preview Assets.xcassets in Resources */,
 				070D8710306A1B2B00C0AF9F /* Assets.xcassets in Resources */,
+				07245D9B306B550E00C49889 /* APIConfig.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +160,9 @@
 				070D871C306A3BDD00C0AF9F /* HomeView.swift in Sources */,
 				070D870C306A1B2800C0AF9F /* MovieFlixApp.swift in Sources */,
 				070D871A306A393400C0AF9F /* Constants.swift in Sources */,
+				07245D99306B4E5100C49889 /* Title.swift in Sources */,
 				070D8720306AB98100C0AF9F /* HorizontalListView.swift in Sources */,
+				07245D9D306B562000C49889 /* APIConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
