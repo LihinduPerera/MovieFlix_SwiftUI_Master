@@ -18,6 +18,7 @@
 		07245D9B306B550E00C49889 /* APIConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 07245D9A306B550E00C49889 /* APIConfig.json */; };
 		07245D9D306B562000C49889 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07245D9C306B562000C49889 /* APIConfig.swift */; };
 		07245D9F306B5B3000C49889 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07245D9E306B5B3000C49889 /* Errors.swift */; };
+		07245DA1306B680200C49889 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07245DA0306B680200C49889 /* DataFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		07245D9A306B550E00C49889 /* APIConfig.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = APIConfig.json; sourceTree = "<group>"; };
 		07245D9C306B562000C49889 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
 		07245D9E306B5B3000C49889 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		07245DA0306B680200C49889 /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				070D870B306A1B2800C0AF9F /* MovieFlixApp.swift */,
 				070D870D306A1B2800C0AF9F /* ContentView.swift */,
 				07245D9E306B5B3000C49889 /* Errors.swift */,
+				07245DA0306B680200C49889 /* DataFetcher.swift */,
 				070D871B306A3BDD00C0AF9F /* HomeView.swift */,
 				07245D98306B4E5100C49889 /* Title.swift */,
 				07245D9A306B550E00C49889 /* APIConfig.json */,
@@ -165,6 +168,7 @@
 				070D871A306A393400C0AF9F /* Constants.swift in Sources */,
 				07245D9F306B5B3000C49889 /* Errors.swift in Sources */,
 				07245D99306B4E5100C49889 /* Title.swift in Sources */,
+				07245DA1306B680200C49889 /* DataFetcher.swift in Sources */,
 				070D8720306AB98100C0AF9F /* HorizontalListView.swift in Sources */,
 				07245D9D306B562000C49889 /* APIConfig.swift in Sources */,
 			);

@@ -27,12 +27,6 @@ struct ContentView: View {
                     Label(Constants.downloadString, systemImage: Constants.downloadIconString)
                 }
         }
-        .onAppear{
-            if let config = APIConfig.shared {
-                print(config.tmdbAPIKey)
-                print(config.tmdbBaseURL)
-            }
-        }
     }
 }
 
