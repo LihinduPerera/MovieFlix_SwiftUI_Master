@@ -20,6 +20,7 @@
 		07245D9F306B5B3000C49889 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07245D9E306B5B3000C49889 /* Errors.swift */; };
 		07245DA1306B680200C49889 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07245DA0306B680200C49889 /* DataFetcher.swift */; };
 		075F16FB306C14EB0090F4DD /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075F16FA306C14EB0090F4DD /* ViewModel.swift */; };
+		07744D7D306D57EE00BCA79B /* TitleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07744D7C306D57EE00BCA79B /* TitleDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		07245D9E306B5B3000C49889 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		07245DA0306B680200C49889 /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
 		075F16FA306C14EB0090F4DD /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		07744D7C306D57EE00BCA79B /* TitleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 			children = (
 				070D870B306A1B2800C0AF9F /* MovieFlixApp.swift */,
 				070D870D306A1B2800C0AF9F /* ContentView.swift */,
+				07744D7C306D57EE00BCA79B /* TitleDetailView.swift */,
 				07245D9E306B5B3000C49889 /* Errors.swift */,
 				075F16FA306C14EB0090F4DD /* ViewModel.swift */,
 				07245DA0306B680200C49889 /* DataFetcher.swift */,
@@ -172,6 +175,7 @@
 				070D871A306A393400C0AF9F /* Constants.swift in Sources */,
 				07245D9F306B5B3000C49889 /* Errors.swift in Sources */,
 				07245D99306B4E5100C49889 /* Title.swift in Sources */,
+				07744D7D306D57EE00BCA79B /* TitleDetailView.swift in Sources */,
 				07245DA1306B680200C49889 /* DataFetcher.swift in Sources */,
 				070D8720306AB98100C0AF9F /* HorizontalListView.swift in Sources */,
 				07245D9D306B562000C49889 /* APIConfig.swift in Sources */,
