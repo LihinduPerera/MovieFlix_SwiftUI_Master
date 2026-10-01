@@ -26,7 +26,6 @@ struct TitleDetailView: View {
                         .bold()
                         .font(.title2)
                         .padding(5)
-                        .padding(.top, -20)
                     
                     Text(title.overview ?? "")
                         .padding(5)
