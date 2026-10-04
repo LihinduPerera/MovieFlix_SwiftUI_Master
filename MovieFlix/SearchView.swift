@@ -10,6 +10,8 @@ import SwiftUI
 struct SearchView: View {
     var titles = Title.previewTitles
     @State private var searchByMovies = true
+    @State private var searchText = ""
+    
     
     var body: some View {
         NavigationStack {
@@ -25,7 +27,7 @@ struct SearchView: View {
                         } placeholder: {
                             ProgressView()
                         }
-                        .frame(width: 1220, height: 200)
+                        .frame(width: 120, height: 200)
                     }
                 }
             }
@@ -39,6 +41,7 @@ struct SearchView: View {
                     }
                 }
             }
+            .searchable(text: $searchText, prompt: searchByMovies ? Constants.moviePlaceHolderString : Constants.tvPlaceHolderString)
         }
     }
 }
