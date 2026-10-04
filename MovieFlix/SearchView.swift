@@ -10,36 +10,41 @@ import SwiftUI
 struct SearchView: View {
     @State private var searchByMovies = true
     @State private var searchText = ""
-    private let searchViewModel = SearchViewModel()
+    @State private var searchViewModel = SearchViewModel()
     @State private var navigationPath = NavigationPath()
     
     var body: some View {
         NavigationStack(path: $navigationPath){
             ScrollView {
-                if let error = searchViewModel.errorMessage {
-                    Text(error)
-                        .foregroundStyle(.red)
-                        .padding()
-                        .background(.ultraThinMaterial)
-                        .clipShape(.rect(cornerRadius: 10))
-                }
-                LazyVGrid(columns: [GridItem(),GridItem(),GridItem()]) {
-                    ForEach(searchViewModel.searchTitles) {title in
-                        AsyncImage(url: URL(string: title.posterPath ?? "")) {
-                            image in
-                            image
-                                .resizable()
-                                .scaledToFit()
-                                .clipShape(.rect(cornerRadius: 10))
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .frame(width: 120, height: 200)
-                        .onTapGesture {
-                            navigationPath.append(title)
+                VStack(alignment: .leading, spacing: 16) {
+                    if let error = searchViewModel.errorMessage {
+                        Text(error)
+                            .foregroundStyle(.red)
+                            .padding()
+                            .background(.ultraThinMaterial)
+                            .clipShape(.rect(cornerRadius: 10))
+                    }
+
+                    LazyVGrid(columns: Array(repeating: GridItem(.fixed(120), spacing: 12), count: 3), spacing: 12) {
+                        ForEach(searchViewModel.searchTitles) { title in
+                            AsyncImage(url: URL(string: title.posterPath ?? "")) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            .frame(width: 120, height: 200)
+                            .clipShape(.rect(cornerRadius: 10))
+                            .onTapGesture {
+                                navigationPath.append(title)
+                            }
                         }
                     }
                 }
+                .scrollTargetLayout()
+                .padding(.horizontal, 12)
+                .padding(.top, 8)
             }
             .navigationTitle(searchByMovies ? Constants.movieSearchString : Constants.tvSearchString)
             .toolbar {
