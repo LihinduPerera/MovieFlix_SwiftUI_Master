@@ -19,10 +19,7 @@ struct SearchView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     if let error = searchViewModel.errorMessage {
                         Text(error)
-                            .foregroundStyle(.red)
-                            .padding()
-                            .background(.ultraThinMaterial)
-                            .clipShape(.rect(cornerRadius: 10))
+                            .errorMessage()
                     }
 
                     LazyVGrid(columns: Array(repeating: GridItem(.fixed(120), spacing: 12), count: 3), spacing: 12) {

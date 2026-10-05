@@ -41,7 +41,7 @@ struct VerticalListView: View {
                         modelContext.delete(title)
                         try? modelContext.save()
                     } label: {
-                        Image(systemName: "trash")
+                        Image(systemName: Constants.deleteIconString)
                             .tint(.red)
                     }
                 }
