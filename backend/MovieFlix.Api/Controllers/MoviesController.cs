@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using MovieFlix.Api.Models;
+using MovieFlix.Api.Services;
 
 namespace MovieFlix.Api.Controllers;
 
@@ -7,40 +7,27 @@ namespace MovieFlix.Api.Controllers;
 [Route("api/v1/[controller]")]
 public class MoviesController : ControllerBase
 {
-    private readonly List<Movie> _movies =
-        [
-        new Movie
-        {
-            Id = 1,
-            Title = "Interstellar",
-            Overview = "A team of explorers travels through a wormhole in space."
-        },
-        new Movie
-        {
-            Id = 2,
-            Title = "Inception",
-            Overview = "A skilled thief enters people's dreams to steal information."
-        },
-        new Movie
-        {
-            Id = 3,
-            Title = "The Dark Knight",
-            Overview = "Batman faces a dangerous criminal who brings chaos to Gotham."
-        }
-    ];
+    private readonly MovieService _movieService;
+
+    public MoviesController(MovieService movieService)
+    {
+        _movieService = movieService;
+    }
 
     [HttpGet]
     public IActionResult GetMovies()
     {
-        return Ok(_movies);
+        var movies = _movieService.GetMovies();
+
+        return Ok(movies);
     }
 
     [HttpGet("{id}")]
     public IActionResult GetMovies(int id)
     {
-        var movie = _movies.FirstOrDefault(movie => movie.Id == id);
+        var movie = _movieService.getMovieById(id);
 
-        if (movie is null)
+        if (movie == null)
         {
             return NotFound();
         }

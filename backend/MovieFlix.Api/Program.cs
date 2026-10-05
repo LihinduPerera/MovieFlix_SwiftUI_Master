@@ -1,7 +1,11 @@
+using MovieFlix.Api.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<MovieService>();
 
 var app = builder.Build();
 
