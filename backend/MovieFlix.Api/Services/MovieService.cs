@@ -1,34 +1,29 @@
-﻿using MovieFlix.Api.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MovieFlix.Api.Data;
+using MovieFlix.Api.Models;
 
 namespace MovieFlix.Api.Services;
 
 public class MovieService : IMovieService
 {
-        private readonly List<Movie> _movies = [
-            new Movie {
-                Id = 1,
-                Title = "Interstellar",
-                Overview = "A team of explorers travels through a wormhole in space."
-            },
-            new Movie {
-                Id = 2,
-                Title = "Inception",
-                Overview = "A skilled thief enters people's dreams to steal information."
-            },
-            new Movie {
-                Id = 3,
-                Title = "The Dark Knight",
-                Overview = "Batman faces a dangerous criminal who brings chaos to Gotham."
-            }
-        ];
+    private readonly MovieFlixDbContext _context;
 
-    public List<Movie> GetMovies()
+    public MovieService(MovieFlixDbContext context)
     {
-        return _movies;
+        _context = context;
     }
 
-    public Movie? GetMovieById(int id)
+    public async Task<List<Movie>> GetMoviesAsync()
     {
-        return _movies.FirstOrDefault(movie => movie.Id == id);
+        return await _context.Movies
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
+    public async Task<Movie?> GetMovieByIdAsync(int id)
+    {
+        return await _context.Movies
+            .AsNoTracking()
+            .FirstOrDefaultAsync(movie => movie.Id == id);
     }
 }

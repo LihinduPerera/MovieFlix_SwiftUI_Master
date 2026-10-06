@@ -15,17 +15,16 @@ public class MoviesController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetMovies()
+    public async Task<IActionResult> GetMovies()
     {
-        var movies = _movieService.GetMovies();
-
+        var movies = await _movieService.GetMoviesAsync();
         return Ok(movies);
     }
 
-    [HttpGet("{id}")]
-    public IActionResult GetMovies(int id)
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetMovie(int id)
     {
-        var movie = _movieService.GetMovieById(id);
+        var movie = await _movieService.GetMovieByIdAsync(id);
 
         if (movie == null)
         {
@@ -34,5 +33,4 @@ public class MoviesController : ControllerBase
 
         return Ok(movie);
     }
-
 }

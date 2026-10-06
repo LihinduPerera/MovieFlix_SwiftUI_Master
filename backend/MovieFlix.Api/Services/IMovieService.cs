@@ -4,8 +4,8 @@ namespace MovieFlix.Api.Services
 {
     public interface IMovieService
     {
-        List<Movie> GetMovies();
+        Task<List<Movie>> GetMoviesAsync();
 
-        Movie? GetMovieById(int id);
+        Task<Movie?> GetMovieByIdAsync(int id);
     }
 }
