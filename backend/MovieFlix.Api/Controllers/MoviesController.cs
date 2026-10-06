@@ -7,9 +7,9 @@ namespace MovieFlix.Api.Controllers;
 [Route("api/v1/[controller]")]
 public class MoviesController : ControllerBase
 {
-    private readonly MovieService _movieService;
+    private readonly IMovieService _movieService;
 
-    public MoviesController(MovieService movieService)
+    public MoviesController(IMovieService movieService)
     {
         _movieService = movieService;
     }
@@ -25,7 +25,7 @@ public class MoviesController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetMovies(int id)
     {
-        var movie = _movieService.getMovieById(id);
+        var movie = _movieService.GetMovieById(id);
 
         if (movie == null)
         {

@@ -1,9 +1,9 @@
 ﻿using MovieFlix.Api.Models;
 
-namespace MovieFlix.Api.Services
+namespace MovieFlix.Api.Services;
+
+public class MovieService : IMovieService
 {
-    public class MovieService
-    {
         private readonly List<Movie> _movies = [
             new Movie {
                 Id = 1,
@@ -22,15 +22,13 @@ namespace MovieFlix.Api.Services
             }
         ];
 
-        public List<Movie> GetMovies()
-        {
-            return _movies;
-        }
+    public List<Movie> GetMovies()
+    {
+        return _movies;
+    }
 
-        public Movie? getMovieById(int id)
-        {
-            return _movies.FirstOrDefault(movie => movie.Id == id);
-        }
+    public Movie? GetMovieById(int id)
+    {
+        return _movies.FirstOrDefault(movie => movie.Id == id);
     }
 }
-
