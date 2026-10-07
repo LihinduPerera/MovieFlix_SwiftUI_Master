@@ -10,7 +10,7 @@ using MovieFlix.Api.Data;
 namespace MovieFlix.Api.Migrations
 {
     [DbContext(typeof(MovieFlixDbContext))]
-    [Migration("20261006034446_InitialCreate")]
+    [Migration("20261007014044_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

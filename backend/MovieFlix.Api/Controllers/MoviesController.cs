@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MovieFlix.Api.DTOs.Movies;
 using MovieFlix.Api.Services;
 
 namespace MovieFlix.Api.Controllers;
@@ -32,5 +33,16 @@ public class MoviesController : ControllerBase
         }
 
         return Ok(movie);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateMovie(CreateMovieRequest request)
+    {
+        var movie = await _movieService.CreateMovieAsync(request);
+
+        return CreatedAtAction(
+            nameof(GetMovie),
+            new { id = movie.Id },
+            movie);
     }
 }

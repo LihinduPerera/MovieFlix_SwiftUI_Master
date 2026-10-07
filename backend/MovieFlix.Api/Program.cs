@@ -4,11 +4,13 @@ using MovieFlix.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<MovieFlixDbContext>(options =>
-    options.UseSqlite("Data Source=MovieLix.db"));
+    options.UseSqlite("Data Source=MovieFlix.db"));
 
 builder.Services.AddScoped<IMovieService, MovieService>();
 
@@ -16,7 +18,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();

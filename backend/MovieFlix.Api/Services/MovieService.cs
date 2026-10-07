@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieFlix.Api.Data;
+using MovieFlix.Api.DTOs.Movies;
 using MovieFlix.Api.Models;
 
 namespace MovieFlix.Api.Services;
@@ -25,5 +26,21 @@ public class MovieService : IMovieService
         return await _context.Movies
             .AsNoTracking()
             .FirstOrDefaultAsync(movie => movie.Id == id);
+    }
+
+    public async Task<Movie> CreateMovieAsync(CreateMovieRequest request)
+    {
+        var movie = new Movie
+        {
+            TmdbId = request.TmdId,
+            Title = request.Title,
+            Overview = request.Overview
+        };
+
+        _context.Movies.Add(movie);
+
+        await _context.SaveChangesAsync();
+
+        return movie;
     }
 }
