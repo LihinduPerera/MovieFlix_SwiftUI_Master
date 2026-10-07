@@ -11,7 +11,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<MovieFlixDbContext>(options =>
-    options.UseSqlite("Data Source=MovieFlix.db"));
+{
+    options.UseSqlite("Data Source=MovieFlix.db");
+
+    //For development
+    if (builder.Environment.IsDevelopment())
+    {
+        options
+            .EnableDetailedErrors()
+            .EnableSensitiveDataLogging()
+            .LogTo(Console.WriteLine);
+    }
+});
 
 builder.Services.AddScoped<IMovieService, MovieService>();
 

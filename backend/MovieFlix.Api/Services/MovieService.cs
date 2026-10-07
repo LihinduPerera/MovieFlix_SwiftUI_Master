@@ -36,7 +36,9 @@ public class MovieService : IMovieService
         // 1.Filter
         if(!string.IsNullOrWhiteSpace(request.Search))
         {
-            query = query.Where(movie => movie.Title.Contains(request.Search));
+            var search = request.Search.Trim();
+
+            query = query.Where(movie => EF.Functions.Like(movie.Title, $"%{search}%"));
         }
 
         // 2.Sort
