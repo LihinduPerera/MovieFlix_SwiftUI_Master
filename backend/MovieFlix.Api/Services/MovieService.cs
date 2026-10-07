@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieFlix.Api.Data;
 using MovieFlix.Api.DTOs.Movies;
+using MovieFlix.Api.Exceptions;
 using MovieFlix.Api.Models;
 
 namespace MovieFlix.Api.Services;
@@ -14,25 +15,56 @@ public class MovieService : IMovieService
         _context = context;
     }
 
-    public async Task<List<Movie>> GetMoviesAsync()
+    private static MovieResponse MapToResponse(Movie movie)
     {
-        return await _context.Movies
+        return new MovieResponse
+        {
+            Id = movie.Id,
+            TmdbId = movie.TmdbId,
+            Title = movie.Title,
+            Overview = movie.Overview
+        };
+    }
+
+    public async Task<List<MovieResponse>> GetMoviesAsync()
+    {
+        var movies = await _context.Movies
             .AsNoTracking()
             .ToListAsync();
+
+        return movies
+            .Select(MapToResponse)
+            .ToList();
     }
 
-    public async Task<Movie?> GetMovieByIdAsync(int id)
+    public async Task<MovieResponse?> GetMovieByIdAsync(int id)
     {
-        return await _context.Movies
+        var movie = await _context.Movies
             .AsNoTracking()
             .FirstOrDefaultAsync(movie => movie.Id == id);
+
+        if(movie is null)
+        {
+            return null;
+        }
+
+        return MapToResponse(movie);
     }
 
-    public async Task<Movie> CreateMovieAsync(CreateMovieRequest request)
+    public async Task<MovieResponse> CreateMovieAsync(CreateMovieRequest request)
     {
+        var existingMovie = await _context.Movies
+            .AsNoTracking()
+            .FirstOrDefaultAsync(movie => movie.TmdbId == request.TmdbId);
+
+        if(existingMovie is not null)
+        {
+            throw new MovieAlreadyExistsException(request.TmdbId);
+        }
+
         var movie = new Movie
         {
-            TmdbId = request.TmdId,
+            TmdbId = request.TmdbId,
             Title = request.Title,
             Overview = request.Overview
         };
@@ -41,6 +73,6 @@ public class MovieService : IMovieService
 
         await _context.SaveChangesAsync();
 
-        return movie;
+        return MapToResponse(movie);
     }
 }

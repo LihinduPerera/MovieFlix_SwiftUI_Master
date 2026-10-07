@@ -5,10 +5,10 @@ namespace MovieFlix.Api.Services
 {
     public interface IMovieService
     {
-        Task<List<Movie>> GetMoviesAsync();
+        Task<List<MovieResponse>> GetMoviesAsync();
 
-        Task<Movie?> GetMovieByIdAsync(int id);
+        Task<MovieResponse> GetMovieByIdAsync(int id);
 
-        Task<Movie> CreateMovieAsync(CreateMovieRequest request);
+        Task<MovieResponse> CreateMovieAsync(CreateMovieRequest request);
     }
 }

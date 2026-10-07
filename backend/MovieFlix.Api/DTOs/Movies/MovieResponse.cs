@@ -1,18 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿//Response DTOs — Don't Expose Your Database Entities
 
 namespace MovieFlix.Api.DTOs.Movies
 {
-    public class CreateMovieRequest
+    public class MovieResponse
     {
-        [Range(1, int.MaxValue)]
+        public int Id { get; set; }
+
         public int TmdbId { get; set; }
 
-        [Required]
-        [MaxLength(200)]
         public string Title { get; set; } = string.Empty;
 
-        [Required]
-        [MaxLength(2000)]
         public string Overview { get; set; } = string.Empty;
     }
 }
