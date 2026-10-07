@@ -5,7 +5,7 @@ namespace MovieFlix.Api.Services
 {
     public interface IMovieService
     {
-        Task<PagedResponse<MovieResponse>> GetMoviesAsync(int page, int pageSize);
+        Task<PagedResponse<MovieResponse>> GetMoviesAsync(MovieQueyRequest request);
 
         Task<MovieResponse?> GetMovieByIdAsync(int id);
 

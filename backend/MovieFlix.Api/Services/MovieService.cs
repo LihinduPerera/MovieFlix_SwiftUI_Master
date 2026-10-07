@@ -27,32 +27,56 @@ public class MovieService : IMovieService
         };
     }
 
-    public async Task<PagedResponse<MovieResponse>> GetMoviesAsync(int page, int pageSize)
+    public async Task<PagedResponse<MovieResponse>> GetMoviesAsync(MovieQueyRequest request)
     {
-        //This is called deferred execution.
+        //This is called deferred execution. IQueryable
         var query = _context.Movies
-            .AsNoTracking()
-            .OrderBy(movie => movie.Id);
+            .AsNoTracking();
 
+        // 1.Filter
+        if(!string.IsNullOrWhiteSpace(request.Search))
+        {
+            query = query.Where(movie => movie.Title.Contains(request.Search));
+        }
+
+        // 2.Sort
+        query = request.SortBy.ToLower() switch
+        {
+            "title" => request.SortOrder.ToLower() == "desc"
+                ? query.OrderByDescending(movie => movie.Title)
+                : query.OrderBy(movie => movie.Title),
+
+            "tmdbid" => request.SortOrder.ToLower() == "desc"
+                ? query.OrderByDescending(movie => movie.TmdbId)
+                : query.OrderBy(movie => movie.TmdbId),
+
+            _ => request.SortOrder.ToLower() == "desc"
+                ? query.OrderByDescending(movie => movie.Id)
+                : query.OrderBy(movie => movie.Id)
+        };
+
+        // 3.Count
         var totalCount = await query.CountAsync();
 
+        // 4.Pagination
         var movies = await query
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
+            .Skip((request.Page - 1) * request.PageSize)
+            .Take(request.PageSize)
             .ToListAsync();
-        //This is called deferred execution.
 
+        // 5.Mapping
         var items = movies
             .Select(MapToResponse)
             .ToList();
 
-        var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+        // 6.Calculate total pages
+        var totalPages = (int)Math.Ceiling(totalCount / (double)request.PageSize);
 
         return new PagedResponse<MovieResponse>
         {
             Items = items,
-            Page = page,
-            PageSize = pageSize,
+            Page = request.Page,
+            PageSize = request.PageSize,
             TotalCount = totalCount,
             TotalPages = totalPages
         };
