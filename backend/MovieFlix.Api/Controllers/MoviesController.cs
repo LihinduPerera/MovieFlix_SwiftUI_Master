@@ -16,9 +16,18 @@ public class MoviesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetMovies()
+    public async Task<IActionResult> GetMovies(int page = 1, int pageSize = 20)
     {
-        var movies = await _movieService.GetMoviesAsync();
+        if(page < 1)
+        {
+            return BadRequest("Page must be greater than 0.");
+        }
+
+        if(pageSize < 1 || pageSize > 100)
+        {
+            return BadRequest("Page size must be between 1 and 100.");
+        }
+        var movies = await _movieService.GetMoviesAsync(page, pageSize);
         return Ok(movies);
     }
 

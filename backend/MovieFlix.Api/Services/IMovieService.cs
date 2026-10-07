@@ -1,10 +1,11 @@
-﻿using MovieFlix.Api.DTOs.Movies;
+﻿using MovieFlix.Api.DTOs.Common;
+using MovieFlix.Api.DTOs.Movies;
 
 namespace MovieFlix.Api.Services
 {
     public interface IMovieService
     {
-        Task<List<MovieResponse>> GetMoviesAsync();
+        Task<PagedResponse<MovieResponse>> GetMoviesAsync(int page, int pageSize);
 
         Task<MovieResponse?> GetMovieByIdAsync(int id);
 

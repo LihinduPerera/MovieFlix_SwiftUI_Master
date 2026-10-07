@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieFlix.Api.Data;
+using MovieFlix.Api.DTOs.Common;
 using MovieFlix.Api.DTOs.Movies;
 using MovieFlix.Api.Exceptions;
 using MovieFlix.Api.Models;
@@ -26,15 +27,35 @@ public class MovieService : IMovieService
         };
     }
 
-    public async Task<List<MovieResponse>> GetMoviesAsync()
+    public async Task<PagedResponse<MovieResponse>> GetMoviesAsync(int page, int pageSize)
     {
-        var movies = await _context.Movies
+        //This is called deferred execution.
+        var query = _context.Movies
             .AsNoTracking()
-            .ToListAsync();
+            .OrderBy(movie => movie.Id);
 
-        return movies
+        var totalCount = await query.CountAsync();
+
+        var movies = await query
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        //This is called deferred execution.
+
+        var items = movies
             .Select(MapToResponse)
             .ToList();
+
+        var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+        return new PagedResponse<MovieResponse>
+        {
+            Items = items,
+            Page = page,
+            PageSize = pageSize,
+            TotalCount = totalCount,
+            TotalPages = totalPages
+        };
     }
 
     public async Task<MovieResponse?> GetMovieByIdAsync(int id)
