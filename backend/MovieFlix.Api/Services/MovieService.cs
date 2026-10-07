@@ -75,4 +75,39 @@ public class MovieService : IMovieService
 
         return MapToResponse(movie);
     }
+
+    public async Task<MovieResponse?> UpdateMovieAsync(int id, UpdateMovieRequest request)
+    {
+        var movie = await _context.Movies
+            .FirstOrDefaultAsync(movie => movie.Id == id);
+
+        if(movie is null)
+        {
+            return null;
+        }
+
+        movie.Title = request.Title;
+        movie.Overview = request.Overview;
+
+        await _context.SaveChangesAsync();
+
+        return MapToResponse(movie);
+    }
+
+    public async Task<bool> DeleteMovieAsync(int id)
+    {
+        var movie = await _context.Movies
+            .FirstOrDefaultAsync(movie => movie.Id == id);
+
+        if(movie is null)
+        {
+            return false;
+        }
+
+        _context.Movies.Remove(movie);
+
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
 }

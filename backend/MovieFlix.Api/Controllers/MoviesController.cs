@@ -45,4 +45,30 @@ public class MoviesController : ControllerBase
             new { id = movie.Id },
             movie);
     }
+
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> UpdateMovie(int id, UpdateMovieRequest request)
+    {
+        var movie = await _movieService.UpdateMovieAsync(id, request);
+
+        if (movie is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(movie);
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteMovie(int id)
+    {
+        var deleted = await _movieService.DeleteMovieAsync(id);
+
+        if(!deleted)
+        {
+            return NotFound();
+        }
+
+        return NoContent();
+    }
 }

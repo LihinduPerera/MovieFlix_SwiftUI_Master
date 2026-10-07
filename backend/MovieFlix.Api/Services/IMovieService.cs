@@ -1,5 +1,4 @@
 ﻿using MovieFlix.Api.DTOs.Movies;
-using MovieFlix.Api.Models;
 
 namespace MovieFlix.Api.Services
 {
@@ -7,8 +6,12 @@ namespace MovieFlix.Api.Services
     {
         Task<List<MovieResponse>> GetMoviesAsync();
 
-        Task<MovieResponse> GetMovieByIdAsync(int id);
+        Task<MovieResponse?> GetMovieByIdAsync(int id);
 
         Task<MovieResponse> CreateMovieAsync(CreateMovieRequest request);
+
+        Task<MovieResponse?> UpdateMovieAsync(int id, UpdateMovieRequest request);
+
+        Task<bool> DeleteMovieAsync(int id);
     }
 }
