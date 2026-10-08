@@ -22,5 +22,19 @@ namespace MovieFlix.Api.Controllers
 
             return StatusCode(StatusCodes.Status201Created);
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> login(
+            LoginRequest request)
+        {
+            var response = await _authService.LoginAsync(request);
+
+            if (response is null)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(response);
+        }
     }
 }
