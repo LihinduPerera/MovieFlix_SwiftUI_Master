@@ -25,6 +25,7 @@ builder.Services.AddDbContext<MovieFlixDbContext>(options =>
 });
 
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IFavoriteService, FavoriteService>();
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();

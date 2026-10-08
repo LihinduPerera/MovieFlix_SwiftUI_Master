@@ -158,25 +158,4 @@ public class MovieService : IMovieService
 
         return true;
     }
-
-    public async Task<List<FavoriteMovieResponse>> GetUserFavoritesAsync(int userId)
-    {
-        var favorites = await _context.Favorites
-            .AsNoTracking()
-            .Where(favorite => favorite.UserId == userId)
-            //Include() — load the related entity , Select() — tell the database exactly what you need
-            //We Use Select() because 'I don't need Favorite and Movie entities. I need these five pieces of data.'
-            //That's called Projection!!!!
-            .Select(favorite => new FavoriteMovieResponse
-            {
-                Id = favorite.Id,
-                TmdbId = favorite.Movie.TmdbId,
-                Title = favorite.Movie.Title,
-                Overview = favorite.Movie.Overview,
-                FavoritedAt = favorite.CreatedAt
-            })
-            .ToListAsync();
-
-        return favorites;
-    }
 }

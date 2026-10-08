@@ -7,19 +7,36 @@ namespace MovieFlix.Api.Controllers
     [Route("api/v1/[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly IMovieService _movieService;
+        private readonly IFavoriteService _favoriteService;
 
-        public UsersController(IMovieService movieService)
+        public UsersController(IFavoriteService favoriteService)
         {
-            _movieService = movieService;
+            _favoriteService = favoriteService;
         }
 
         [HttpGet("{userId:int}/favorites")]
         public async Task<IActionResult> GetFavorites(int userId)
         {
-            var favorites = await _movieService.GetUserFavoritesAsync(userId);
+            var favorites = await _favoriteService.GetUserFavoritesAsync(userId);
 
             return Ok(favorites);
+        }
+
+        [HttpPost("{userId:int}/favorites/{movieId:int}")]
+        public async Task<IActionResult> AddFavorite(int userId,int movieId)
+        {
+            var favorite = await _favoriteService
+                .AddFavoriteAsync(userId, movieId);
+
+            if (favorite is null)
+            {
+                return NotFound();
+            }
+
+            return CreatedAtAction(
+                nameof(GetFavorites),
+                new { userId },
+                favorite);
         }
     }
 }

@@ -15,7 +15,5 @@ namespace MovieFlix.Api.Services
         Task<MovieResponse?> UpdateMovieAsync(int id, UpdateMovieRequest request);
 
         Task<bool> DeleteMovieAsync(int id);
-
-        Task<List<FavoriteMovieResponse>> GetUserFavoritesAsync(int userId);
     }
 }

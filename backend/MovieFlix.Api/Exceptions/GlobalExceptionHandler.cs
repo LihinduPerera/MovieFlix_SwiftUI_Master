@@ -27,6 +27,16 @@ public class GlobalExceptionHandler : IExceptionHandler
             };
         }
 
+        if (exception is FavoriteAlreadyExistsException favoriteException)
+        {
+            problemDetails = new ProblemDetails
+            {
+                Title = "Favorite already exists.",
+                Status = StatusCodes.Status409Conflict,
+                Detail = favoriteException.Message
+            };
+        }
+
         httpContext.Response.StatusCode = problemDetails.Status!.Value;
 
         await httpContext.Response.WriteAsJsonAsync(
