@@ -25,9 +25,8 @@ public class GlobalExceptionHandler : IExceptionHandler
                 Status = StatusCodes.Status409Conflict,
                 Detail = movieException.Message
             };
-        }
-
-        if (exception is FavoriteAlreadyExistsException favoriteException)
+        } 
+        else if (exception is FavoriteAlreadyExistsException favoriteException)
         {
             problemDetails = new ProblemDetails
             {

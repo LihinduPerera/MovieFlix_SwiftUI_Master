@@ -23,7 +23,7 @@ namespace MovieFlix.Api.Controllers
         }
 
         [HttpPost("{userId:int}/favorites/{movieId:int}")]
-        public async Task<IActionResult> AddFavorite(int userId,int movieId)
+        public async Task<IActionResult> AddFavorite(int userId, int movieId)
         {
             var favorite = await _favoriteService
                 .AddFavoriteAsync(userId, movieId);
@@ -37,6 +37,19 @@ namespace MovieFlix.Api.Controllers
                 nameof(GetFavorites),
                 new { userId },
                 favorite);
+        }
+
+        [HttpDelete("{userId:int}/favorites/{movieId:int}")]
+        public async Task<IActionResult> RemoveFavorite(int userId, int movieId)
+        {
+            var removed = await _favoriteService.RemoveFavoriteAsync(userId, movieId);
+
+            if(!removed)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
     }
 }

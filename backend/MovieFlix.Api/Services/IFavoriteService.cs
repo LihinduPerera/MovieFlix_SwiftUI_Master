@@ -6,6 +6,6 @@ namespace MovieFlix.Api.Services
     {
         Task<List<FavoriteMovieResponse>> GetUserFavoritesAsync(int userId);
         Task<FavoriteMovieResponse?> AddFavoriteAsync(int userId, int movieId);
-        //Task<bool> RemoveFavoriteAsync(int userId, int movieId);
+        Task<bool> RemoveFavoriteAsync(int userId, int movieId);
     }
 }

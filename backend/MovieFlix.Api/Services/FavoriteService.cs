@@ -91,5 +91,24 @@ namespace MovieFlix.Api.Services
                 })
                 .FirstAsync();
         }
+
+        public async Task<bool> RemoveFavoriteAsync(int userId,int movieId)
+        {
+            var favorite = await _context.Favorites
+                .FirstOrDefaultAsync(favorite =>
+                    favorite.UserId == userId &&
+                    favorite.MovieId == movieId);
+
+            if (favorite is null)
+            {
+                return false;
+            }
+
+            _context.Favorites.Remove(favorite);
+
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
