@@ -1,4 +1,5 @@
 ﻿using MovieFlix.Api.DTOs.Common;
+using MovieFlix.Api.DTOs.Favorites;
 using MovieFlix.Api.DTOs.Movies;
 
 namespace MovieFlix.Api.Services
@@ -14,5 +15,7 @@ namespace MovieFlix.Api.Services
         Task<MovieResponse?> UpdateMovieAsync(int id, UpdateMovieRequest request);
 
         Task<bool> DeleteMovieAsync(int id);
+
+        Task<List<FavoriteMovieResponse>> GetUserFavoritesAsync(int userId);
     }
 }

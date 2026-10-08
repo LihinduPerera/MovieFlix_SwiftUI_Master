@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieFlix.Api.Data;
 
@@ -10,9 +11,11 @@ using MovieFlix.Api.Data;
 namespace MovieFlix.Api.Migrations
 {
     [DbContext(typeof(MovieFlixDbContext))]
-    partial class MovieFlixDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261007134307_AddUsersAndFavorites")]
+    partial class AddUsersAndFavorites
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.20");
@@ -75,7 +78,7 @@ namespace MovieFlix.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CreateedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("DisplayName")
