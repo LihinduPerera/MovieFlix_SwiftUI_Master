@@ -74,7 +74,7 @@ namespace MovieFlix.Api.Services
                 return null;
             }
 
-            var token = _jwtService.GenerateToken(user.Id, user.Email);
+            var token = _jwtService.GenerateToken(user.Id, user.Email, user.Role);
 
             return new LoginResponse
             {

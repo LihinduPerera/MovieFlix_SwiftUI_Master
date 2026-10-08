@@ -26,6 +26,15 @@ namespace MovieFlix.Api.Controllers
                 .GetUserFavoritesAsync(_currentUser.UserId);
 
             return Ok(favorites);
+
+            //var claims = User.Claims
+            //    .Select(claims => new
+            //    {
+            //        claims.Type,
+            //        claims.Value
+            //    });
+
+            //return Ok(claims);
         }
 
         [Authorize]
