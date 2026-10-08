@@ -35,8 +35,17 @@ public class GlobalExceptionHandler : IExceptionHandler
                 Detail = favoriteException.Message
             };
         }
+        else if (exception is UserAlreadyExistsException userException)
+        {
+            problemDetails = new ProblemDetails
+            {
+                Title = "User already exists.",
+                Status = StatusCodes.Status409Conflict,
+                Detail = userException.Message
+            };
+        }
 
-        httpContext.Response.StatusCode = problemDetails.Status!.Value;
+            httpContext.Response.StatusCode = problemDetails.Status!.Value;
 
         await httpContext.Response.WriteAsJsonAsync(
             problemDetails,

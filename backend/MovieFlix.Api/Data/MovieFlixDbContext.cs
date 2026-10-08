@@ -45,6 +45,10 @@ namespace MovieFlix.Api.Data
                     favorite.MovieId
                 })
                 .IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasIndex(user => user.Email)
+                .IsUnique();
         }
     }
 }
