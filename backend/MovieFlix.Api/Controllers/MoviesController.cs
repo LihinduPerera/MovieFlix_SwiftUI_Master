@@ -91,7 +91,7 @@ public class MoviesController : ControllerBase
     }
 
     [HttpGet("search")]
-    public async Task<ActionResult<TmdbMovieSearchResponse>> SearchMovies(
+    public async Task<ActionResult<MovieSearchPageResponse>> SearchMovies(
         [FromQuery] string query,
         [FromQuery] int page = 1,
         CancellationToken cancellationToken = default)
@@ -109,11 +109,32 @@ public class MoviesController : ControllerBase
             return BadRequest("Page must be between 1 and 500.");
         }
 
-        var resutl = await _tmdbService.SearchMoviesAsync(
+        var results = await _tmdbService.SearchMoviesAsync(
             query.Trim(),
             page,
             cancellationToken);
 
-        return Ok(resutl);
+        var response = new MovieSearchPageResponse
+        {
+            Page = results.Page,
+            TotalPages = results.TotalPages,
+            TotalResults = results.TotalResults,
+
+            Results = results.Results
+        .Select(movie => new MovieSearchResponse
+        {
+            TmdbId = movie.Id,
+            Title = movie.Title,
+            Overview = movie.Overview,
+            PosterPath = movie.PosterPath,
+            BackdropPath = movie.BackdropPath,
+            ReleaseDate = movie.ReleaseDate,
+            VoteAverage = movie.VoteAverage,
+            VoteCount = movie.VoteCount
+        })
+        .ToList()
+        };
+
+        return Ok(response);
     }
 }
