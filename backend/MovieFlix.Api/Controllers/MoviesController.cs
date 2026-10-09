@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieFlix.Api.DTOs.Movies;
+using MovieFlix.Api.DTOs.Tmdb;
 using MovieFlix.Api.Services;
 
 namespace MovieFlix.Api.Controllers;
@@ -9,11 +11,13 @@ namespace MovieFlix.Api.Controllers;
 public class MoviesController : ControllerBase
 {
     private readonly IMovieService _movieService;
+    private readonly ITmdbService _tmdbService;
 
-    public MoviesController(IMovieService movieService)
+    public MoviesController(IMovieService movieService, ITmdbService tmdbService)
     {
         _movieService = movieService;
-    }
+        _tmdbService = tmdbService;
+    } 
 
     [HttpGet]
     public async Task<IActionResult> GetMovies([FromQuery] MovieQueyRequest request)
@@ -46,6 +50,7 @@ public class MoviesController : ControllerBase
         return Ok(movie);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> CreateMovie(CreateMovieRequest request)
     {
@@ -57,6 +62,7 @@ public class MoviesController : ControllerBase
             movie);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateMovie(int id, UpdateMovieRequest request)
     {
@@ -70,6 +76,7 @@ public class MoviesController : ControllerBase
         return Ok(movie);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteMovie(int id)
     {
@@ -81,5 +88,32 @@ public class MoviesController : ControllerBase
         }
 
         return NoContent();
+    }
+
+    [HttpGet("search")]
+    public async Task<ActionResult<TmdbMovieSearchResponse>> SearchMovies(
+        [FromQuery] string query,
+        [FromQuery] int page = 1,
+        CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            return BadRequest("Search query is required.");
+        }
+        if (query.Trim().Length > 200)
+        {
+            return BadRequest("Search query cannot exeed 200 characters.");
+        }
+        if (page < 1 || page > 500)
+        {
+            return BadRequest("Page must be between 1 and 500.");
+        }
+
+        var resutl = await _tmdbService.SearchMoviesAsync(
+            query.Trim(),
+            page,
+            cancellationToken);
+
+        return Ok(resutl);
     }
 }

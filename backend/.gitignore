@@ -60,3 +60,4 @@ coverage.xml
 
 # Generated files
 Generated/
+*appsettings.json
