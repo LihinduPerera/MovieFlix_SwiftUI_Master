@@ -30,13 +30,13 @@ builder.Services.AddDbContext<MovieFlixDbContext>(options =>
     }
 });
 
-builder.Services.AddHttpContextAccessor(
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddHttpClient<ITmdbService, TmdbService>(
     client =>
     {
         client.Timeout = TimeSpan.FromSeconds(10);
     });
-
-builder.Services.AddHttpClient<ITmdbService, TmdbService>();
 
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IFavoriteService, FavoriteService>();

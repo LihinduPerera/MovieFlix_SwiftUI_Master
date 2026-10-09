@@ -31,17 +31,70 @@ namespace MovieFlix.Api.Services
 
             var url = $"search/movie?query={encodedQuery}&page={page}";
 
-            using var response = await _httpClient.GetAsync(url, cancellationToken);
+            try
+            {
+                using var response = await _httpClient.GetAsync(url, cancellationToken);
 
-            if (!response.IsSuccessStatusCode)
+                if(!response.IsSuccessStatusCode)
+                {
+                    throw new TmdbServiceException();
+                }
+
+                var result = await response.Content
+                    .ReadFromJsonAsync<TmdbMovieSearchResponse>(
+                    cancellationToken: cancellationToken);
+
+                return result ?? throw new TmdbServiceException();
+
+            } catch (HttpRequestException ex)
+            {
+                throw new TmdbServiceException(ex);
+            }
+            catch (OperationCanceledException) when (!cancellationToken.IsCancellationRequested)
+            {
+                // HttpClient timed out, rather than the caller cancelling.
+                throw new TmdbServiceException();
+            }
+        }
+
+
+        public async Task<TmdbMovieDetailsResponse> GetMovieDetailsAsync(
+            int tmdbId,
+            CancellationToken cancellationToken = default)
+        {
+            if (tmdbId <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(tmdbId));
+            }
+
+            var url = $"movie/{tmdbId}";
+
+            try
+            {
+                using var response = await _httpClient.GetAsync(
+                    url,
+                    cancellationToken);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new TmdbServiceException();
+                }
+
+                var result = await response.Content
+                    .ReadFromJsonAsync<TmdbMovieDetailsResponse>(
+                        cancellationToken: cancellationToken);
+
+                return result ?? throw new TmdbServiceException();
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new TmdbServiceException(ex);
+            }
+            catch (OperationCanceledException)
+                when (!cancellationToken.IsCancellationRequested)
             {
                 throw new TmdbServiceException();
             }
-
-            var result = await response.Content.ReadFromJsonAsync<TmdbMovieSearchResponse>(
-                cancellationToken: cancellationToken);
-
-            return result ?? throw new InvalidOperationException("TMDB returned an empty response.");
         }
     }
 }

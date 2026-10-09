@@ -7,5 +7,11 @@
         {
 
         }
+
+        public TmdbServiceException(Exception innerException)
+            :base("The movie provider could not complete the request.", innerException)
+        {
+
+        }
     }
 }

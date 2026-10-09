@@ -6,5 +6,9 @@ namespace MovieFlix.Api.Services
     {
         Task<TmdbMovieSearchResponse> SearchMoviesAsync(
             string query, int page, CancellationToken cancellationToken = default);
+
+        Task<TmdbMovieDetailsResponse> GetMovieDetailsAsync(
+            int tmdbId,
+            CancellationToken cancellationToken = default);
     }
 }

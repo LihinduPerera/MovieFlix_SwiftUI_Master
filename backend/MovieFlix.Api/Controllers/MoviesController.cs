@@ -137,4 +137,39 @@ public class MoviesController : ControllerBase
 
         return Ok(response);
     }
+
+
+    [HttpGet("tmdb/{tmdbId:int}")]
+    public async Task<ActionResult<MovieDetailsResponse>> GetTmdbMovieDetails(
+        int tmdbId,
+        CancellationToken cancellationToken)
+    {
+        if (tmdbId <= 0)
+        {
+            return BadRequest("TMDB movie ID must be greater than zero.");
+        }
+
+        var movie = await _tmdbService.GetMovieDetailsAsync(
+            tmdbId,
+            cancellationToken);
+
+        var response = new MovieDetailsResponse
+        {
+            TmdbId = movie.Id,
+            Title = movie.Title,
+            Overview = movie.Overview,
+            PosterPath = movie.PosterPath,
+            BackdropPath = movie.BackdropPath,
+            ReleaseDate = movie.ReleaseDate,
+            VoteAverage = movie.VoteAverage,
+            VoteCount = movie.VoteCount,
+            Runtime = movie.Runtime,
+            Tagline = movie.Tagline,
+            Genres = movie.Genres
+                .Select(genre => genre.Name)
+                .ToList()
+        };
+
+        return Ok(response);
+    }
 }
