@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using MovieFlix.Api.Configuration;
 using MovieFlix.Api.DTOs.Tmdb;
+using MovieFlix.Api.Exceptions;
 
 namespace MovieFlix.Api.Services
 {
@@ -32,7 +33,10 @@ namespace MovieFlix.Api.Services
 
             using var response = await _httpClient.GetAsync(url, cancellationToken);
 
-            response.EnsureSuccessStatusCode();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new TmdbServiceException();
+            }
 
             var result = await response.Content.ReadFromJsonAsync<TmdbMovieSearchResponse>(
                 cancellationToken: cancellationToken);

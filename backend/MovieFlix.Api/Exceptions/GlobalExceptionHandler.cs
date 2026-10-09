@@ -44,6 +44,15 @@ public class GlobalExceptionHandler : IExceptionHandler
                 Detail = userException.Message
             };
         }
+        else if (exception is TmdbServiceException tmdbException)
+        {
+            problemDetails = new ProblemDetails
+            {
+                Title = "TMDb service error.",
+                Status = StatusCodes.Status502BadGateway,
+                Detail = tmdbException.Message
+            };
+        }
 
             httpContext.Response.StatusCode = problemDetails.Status!.Value;
 
