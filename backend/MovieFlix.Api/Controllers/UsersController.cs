@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MovieFlix.Api.DTOs.Favorites;
 using MovieFlix.Api.Services;
 
 namespace MovieFlix.Api.Controllers
@@ -49,6 +50,24 @@ namespace MovieFlix.Api.Controllers
             }
 
             return CreatedAtAction(nameof(GetMyFavorites), favorite);
+        }
+
+        [Authorize]
+        [HttpPost("/api/v1/me/favorites/tmdb/{tmdbId:int}")]
+        public async Task<ActionResult<FavoriteMovieResponse>> AddTmdbMovieToFavorite(
+            int tmdbId, CancellationToken cancellationToken)
+        {
+            if (tmdbId <= 0)
+            {
+                return BadRequest("TMDB movie ID must be greater than zero.");
+            }
+
+            var favorite = await _favoriteService.AddFavoriteByTmdbIdAsync(
+                _currentUser.UserId,
+                tmdbId,
+                cancellationToken);
+
+            return Ok(favorite);
         }
 
         [Authorize]

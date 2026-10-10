@@ -9,10 +9,12 @@ namespace MovieFlix.Api.Services
     public class FavoriteService : IFavoriteService
     {
         private readonly MovieFlixDbContext _context;
+        private readonly ITmdbService _tmdbService;
 
-        public FavoriteService(MovieFlixDbContext context)
+        public FavoriteService(MovieFlixDbContext context, ITmdbService tmdbService)
         {
             _context = context;
+            _tmdbService = tmdbService;
         }
 
         public async Task<List<FavoriteMovieResponse>> GetUserFavoritesAsync(int userId)
@@ -109,6 +111,33 @@ namespace MovieFlix.Api.Services
             await _context.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<FavoriteMovieResponse> AddFavoriteByTmdbIdAsync(
+            int userId, int tmdbId, CancellationToken cancellationToken = default)
+        {
+            var movie = await _context.Movies.SingleOrDefaultAsync(
+                movie => movie.TmdbId == tmdbId,
+                cancellationToken);
+
+            if (movie is null)
+            {
+                var tmdbMovie = await _tmdbService.GetMovieDetailsAsync(tmdbId, cancellationToken);
+
+                movie = new Movie
+                {
+                    TmdbId = tmdbId,
+                    Title = tmdbMovie.Title,
+                    Overview = tmdbMovie.Overview
+                };
+
+                _context.Movies.Add(movie);
+
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+
+            return await AddFavoriteAsync(userId, movie.Id);
+
         }
     }
 }
